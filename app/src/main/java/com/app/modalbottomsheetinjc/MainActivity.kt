@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.app.modalbottomsheetinjc.ui.theme.BlackShade
 import com.app.modalbottomsheetinjc.ui.theme.ModalBottomSheetInJcTheme
 import kotlinx.coroutines.launch
@@ -33,13 +34,28 @@ class MainActivity : ComponentActivity() {
                     sheetState = modalBottomSheetState,
                     sheetBackgroundColor = BlackShade,
                     sheetContent = {
-                        Box(
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(500.dp),
-                            contentAlignment = Alignment.Center
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
                         ) {
-                            Text(text = "Hello, I am a modal bottom sheet 😍", color = Color.White)
+                            Text(
+                                text = "Hello, I am a modal bottom sheet 😍",
+                                color = Color.White,
+                                fontSize = 18.sp
+                            )
+
+                            Button(
+                                onClick = {
+                                    coroutineScope.launch {
+                                        modalBottomSheetState.hide()
+                                    }
+                                }
+                            ) {
+                                Text(text = "Click to close sheet")
+                            }
                         }
                     },
                     sheetShape = RoundedCornerShape(topStart = 15.dp, topEnd = 15.dp),
@@ -51,7 +67,6 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
                     ) {
-                        Text(text = "Hello, Android devs 😀")
 
                         Button(
                             onClick = {
